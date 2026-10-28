@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KisanSetu AI – Kisan Se Seva Tak</title>
+<style>
+:root{--bg:#f4f7f1;--card:#fff;--ink:#14281d;--mute:#5d6f64;--line:#dfe8dc;--g:#1f7a45;--g2:#0f4d2c;--gold:#d99a1e;--soft:#e6f2e3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a13;--card:#16261c;--ink:#e8f1ea;--mute:#9bb0a2;--line:#27402f;--soft:#1d3426;--g:#3fb06f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1a13;--card:#16261c;--ink:#e8f1ea;--mute:#9bb0a2;--line:#27402f;--soft:#1d3426;--g:#3fb06f;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:10px 16px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.15rem;color:var(--g);cursor:pointer;background:none;border:0;text-align:left;padding:0}
+.brand small{display:block;font-size:.6rem;letter-spacing:.14em;color:var(--mute);font-weight:600}
+nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;max-width:100%}
+nav button{border:0;background:none;color:var(--mute);padding:8px 12px;border-radius:99px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+nav button.on{background:var(--soft);color:var(--g)}
+main{max-width:1080px;margin:0 auto;padding:18px 16px 40px}
+h1,h2,h3{line-height:1.2;margin:0 0 6px}
+.eyebrow{font-size:.7rem;letter-spacing:.14em;font-weight:700;color:var(--g)}
+.hero{border-radius:22px;padding:40px 28px;color:#fff;background:radial-gradient(circle at 85% 20%,#f5c453 0,#f5c45300 22%),linear-gradient(135deg,#0b3a22,#1f7a45 60%,#7bb661);margin-bottom:20px}
+.hero h1{font-size:clamp(1.9rem,5vw,3rem)}.hero h1 span{color:#ffd978}
+.hero p{margin:4px 0;opacity:.92;max-width:540px}
+.btn{border:0;border-radius:12px;padding:11px 18px;font:inherit;font-weight:700;cursor:pointer;background:var(--g);color:#fff}
+.btn.o{background:transparent;color:var(--g);border:1.5px solid var(--g)}
+.btn.w{background:#fff;color:#0f4d2c}.btn.sm{padding:6px 12px;font-size:.85rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:16px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.stat b{display:block;font-size:1.6rem}.stat span{color:var(--mute);font-size:.85rem}
+.qa{cursor:pointer;text-align:left;font:inherit;color:inherit}.qa:hover{border-color:var(--g)}
+.ic{font-size:1.6rem}
+.li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.li:last-child{border:0}.li small{display:block;color:var(--mute)}
+.bar{height:10px;background:var(--soft);border-radius:9px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;background:var(--g)}
+.note{font-size:.82rem;color:var(--mute);background:var(--soft);padding:10px 12px;border-radius:10px;margin-top:14px}
+.tabs{display:flex;gap:8px;margin:14px 0}.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:7px 16px;font:inherit;cursor:pointer}.tabs button.on{background:var(--g);color:#fff;border-color:var(--g)}
+.tag{font-size:.7rem;background:var(--soft);color:var(--g);padding:2px 9px;border-radius:99px;font-weight:700}
+.thumb{height:110px;border-radius:12px;margin-bottom:10px;display:grid;place-items:center;font-size:2.6rem;background:linear-gradient(135deg,#cfe8c8,#8fc47e)}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+label{display:block;font-size:.85rem;font-weight:600;margin-bottom:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modal{position:fixed;inset:0;background:#0008;display:grid;place-items:center;z-index:30;padding:16px}
+.modal>div{background:var(--card);border-radius:18px;padding:22px;width:100%;max-width:440px;max-height:90vh;overflow:auto}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--g2);color:#fff;padding:12px 18px;border-radius:12px;z-index:40;max-width:92vw;font-size:.9rem}
+#lang{width:auto;padding:6px 10px;font-weight:600;border-radius:99px}
+footer{text-align:center;color:var(--mute);font-size:.85rem;padding:24px 16px}
+.x{float:right;background:none;border:0;font-size:1.3rem;color:var(--mute);cursor:pointer}
+@media(max-width:560px){.two{grid-template-columns:1fr}.hero{padding:28px 20px}}
+</style></head><body>
+<div id="app"></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>'₹'+Number(n||0).toLocaleString('en-IN');
+const rd=(k,f)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}};
+const wr=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const today=()=>new Date().toISOString().slice(0,10);
+const S={
+ exp:rd('ks-exp',[{id:1,t:'Cotton seeds',cat:'Seeds',crop:'Cotton',amt:2400,d:'2026-10-26'},{id:2,t:'Drip irrigation repair',cat:'Irrigation',crop:'Onion',amt:850,d:'2026-10-24'},{id:3,t:'Farm labour',cat:'Labour',crop:'Cotton',amt:1800,d:'2026-10-22'}]),
+ lst:rd('ks-lst',[{id:1,crop:'Fresh Onions',em:'🧅',loc:'Nashik, Maharashtra',q:25,p:1850,note:'Grade A'},{id:2,crop:'Soybean',em:'🫘',loc:'Pune, Maharashtra',q:12,p:4650,note:'Cleaned · Grade A'},{id:3,crop:'Fresh Tomatoes',em:'🍅',loc:'Satara, Maharashtra',q:8,p:2200,note:'Grade B'}]),
+ loans:rd('ks-loans',[{id:1,name:'Seasonal farm loan',lender:'My bank',bal:42000,emi:3500,due:'2026-11-10'}]),
+ sav:rd('ks-sav',{goal:5000,saved:1800}),
+ prof:rd('ks-prof',{name:'Farmer',village:'Your village',district:'Pune',acres:'3.5',crops:'Cotton, Onion'}),
+ ord:rd('ks-ord',[])
+};
+const save=()=>{wr('ks-exp',S.exp);wr('ks-lst',S.lst);wr('ks-loans',S.loans);wr('ks-sav',S.sav);wr('ks-prof',S.prof);wr('ks-ord',S.ord)};
+let page='Home',tab='Explore',q='',modal=null,toast='',tt;
+let L=rd('ks-lang','en');
+const pages=['Home','Market','Help Care','Loan','Profile'];
+const say=m=>{toast=m;clearTimeout(tt);tt=setTimeout(()=>{toast='';draw()},3500);draw()};
+const cats=[['Seeds','🌱'],['Fertiliser','🧪'],['Pesticides','🛡️'],['Labour','👷'],['Irrigation','💧'],['Fuel','⛽'],['Transport','📦'],['Other','❓']];
+const help=[['🩺','Crop Doctor','Add a crop photo and symptoms to prepare notes for an expert.'],['🤝','AgroCare experts','Find KVKs, agriculture officers and soil labs near you.'],['🐍','Snake Rescue','Safety steps if a snake is spotted on the farm.'],['🧪','Soil testing','Record soil reports and nutrient information.'],['💧','Smart irrigation','Plan watering around crop stage and soil.'],['⛅','Weather & monsoon','Note local forecasts with the time you checked them.'],['🚜','Machinery & services','Keep tractor, transport and repair contacts together.'],['🌾','Harvest & storage','Plan harvest timing and reduce avoidable waste.']];
+
+function home(){
+ const te=S.exp.reduce((a,e)=>a+e.amt,0),tl=S.loans.reduce((a,l)=>a+l.bal,0),pr=Math.min(100,Math.round(S.sav.saved/Math.max(1,S.sav.goal)*100));
+ const nm=S.prof.name==='Farmer'?'Farmer':esc(S.prof.name.split(' ')[0]);
+ return `<section class="hero"><div class="eyebrow" style="color:#ffd978">YOUR FARM, YOUR FUTURE</div><h1>Growing a better<br><span>tomorrow, together.</span></h1><p><b>Kisan Se Seva Tak</b></p><p>शेतकऱ्यांसाठी स्मार्ट शेती, विश्वासू साथ</p><p>Smart farming. Better decisions. Stronger farmers.</p><div class="row"><button class="btn w" data-a="go" data-v="Market">Explore market →</button><button class="btn o" style="color:#fff;border-color:#fff" data-a="go" data-v="Help Care">Get farm help</button></div></section>
+ <h2>Namaste, ${nm} 👋</h2><p style="color:var(--mute);margin:0">Small steps today. A stronger harvest tomorrow.</p>
+ <div class="grid"><div class="card stat"><span>Recorded expenses</span><b>${money(te)}</b><span>${S.exp.length} entries saved</span></div><div class="card stat"><span>Loan balance</span><b>${money(tl)}</b><span>${tl?'Plan your next instalment':'No loan recorded'}</span></div><div class="card stat"><span>Savings goal</span><b>${pr}%</b><span>${money(S.sav.saved)} of ${money(S.sav.goal)}</span></div></div>
+ <div class="eyebrow">QUICK ACTIONS</div><div class="grid"><button class="card qa" data-a="m" data-v="exp"><div class="ic">➕</div><b>Add expense</b><br><small>Record today’s kharcha</small></button><button class="card qa" data-a="go" data-v="Help Care"><div class="ic">🩺</div><b>Crop Doctor</b><br><small>Check crop concerns</small></button><button class="card qa" data-a="go" data-v="Market"><div class="ic">🧺</div><b>Sell produce</b><br><small>Reach more buyers</small></button><button class="card qa" data-a="go" data-v="Loan"><div class="ic">💰</div><b>Loan & savings</b><br><small>Plan your next payment</small></button></div>
+ <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))"><div class="card"><div class="eyebrow">RECENT EXPENSES</div>${S.exp.slice(0,4).map(e=>`<div class="li"><div><b>${esc(e.t)}</b><small>${esc(e.cat)} · ${esc(e.crop)} · ${esc(e.d)}</small></div><b>${money(e.amt)}</b></div>`).join('')||'<p>No expenses yet.</p>'}<button class="btn sm" data-a="m" data-v="exp">+ Add new</button></div>
+ <div class="card"><div class="eyebrow">AAJ KI BACHAT</div><h3>${money(S.sav.saved)} <small style="color:var(--mute);font-weight:400">of ${money(S.sav.goal)}</small></h3><div class="bar"><i style="width:${pr}%"></i></div><small>${money(Math.max(0,S.sav.goal-S.sav.saved))} to go</small><br><br><button class="btn o sm" data-a="go" data-v="Loan">View savings plan</button></div></div>
+ <div class="note">Demo note: sample listings and figures are illustrative. Your records are stored only in this browser.</div>`}
+
+function market(){
+ const l=S.lst.filter(i=>(i.crop+i.loc+i.note).toLowerCase().includes(q.toLowerCase()));
+ const head=`<div class="eyebrow">AGROTRADE MARKETPLACE</div><h1>Your harvest deserves a fair market.</h1><div class="row"><button class="btn" data-a="m" data-v="lst">+ Sell my crop</button></div><div class="tabs">${['Explore','My Orders'].map(t=>`<button class="${tab===t?'on':''}" data-a="tab" data-v="${t}">${t==='My Orders'?`My Orders (${S.ord.length})`:'Buy produce'}</button>`).join('')}</div>`;
+ if(tab!=='Explore')return head+`<div class="card">${S.ord.map(o=>`<div class="li"><div><b>${esc(o.crop)}</b><small>${o.q} quintal · ${money(o.p)}/quintal · ${esc(o.d)}</small><small>${esc(o.s)}</small></div><span class="tag">Saved locally</span></div>`).join('')||'<p>No enquiries yet. Browse produce and tap Enquire.</p>'}</div><div class="note">Local demo only: no seller is contacted and no binding order is placed.</div>`;
+ return head+`<input id="q" placeholder="Search crops or location…" value="${esc(q)}"><div id="lg">${lg(l)}</div><div class="note">Sample listings and prices are not verified mandi rates or confirmed offers.</div>`}
+function lg(l){return `<div class="grid">${l.map(i=>`<div class="card"><div class="thumb">${i.em||'🌾'}</div><small>📍 ${esc(i.loc)}</small><h3>${esc(i.crop)}</h3><small>${esc(i.note)} · ${i.q} quintal</small><p><b style="font-size:1.3rem">${money(i.p)}</b> <small>per quintal</small></p><button class="btn o sm" data-a="enq" data-v="${i.id}">Enquire / Request order</button></div>`).join('')||'<p>No matching crops.</p>'}</div>`}
+
+function helpPg(){return `<div class="eyebrow">SHETI SUPPORT CENTRE</div><h1>A little help can go a long way.</h1><div class="grid">${help.map((h,i)=>`<div class="card"><div class="ic">${h[0]}</div><h3>${h[1]}</h3><p style="color:var(--mute);margin:4px 0 12px">${h[2]}</p><button class="btn o sm" data-a="m" data-v="h${i}">Open</button></div>`).join('')}</div><div class="note">Need a real expert? Use verified KVK or government agriculture contacts. Live services are not connected in this demo.</div>`}
+
+function loan(){
+ const tl=S.loans.reduce((a,l)=>a+l.bal,0),pr=Math.min(100,Math.round(S.sav.saved/Math.max(1,S.sav.goal)*100));
+ return `<div class="eyebrow">KARJAMUKTI MITRA</div><h1>Your money, with a clearer plan.</h1><div class="row"><button class="btn" data-a="m" data-v="loan">+ Add loan</button></div>
+ <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))"><div class="card"><div class="eyebrow">LOANS & INSTALMENTS · ${money(tl)}</div>${S.loans.map(l=>`<div class="li"><div><b>${esc(l.name)}</b><small>${esc(l.lender||'Lender not specified')}</small><small>${l.due?'Next due: '+esc(l.due)+' · '+money(l.emi):'Due date not entered'}</small></div><div style="text-align:right"><b>${money(l.bal)}</b><br><button class="btn o sm" data-a="rm" data-v="${l.id}">Remove</button></div></div>`).join('')||'<p>No loans recorded.</p>'}</div>
+ <div class="card"><div class="eyebrow">BUILD YOUR SAVINGS HABIT</div><h2>${money(S.sav.saved)}</h2><div class="bar"><i style="width:${pr}%"></i></div><small>${pr}% of ${money(S.sav.goal)} goal</small><br><br><form data-f="sav"><div class="two"><label>Goal (₹)<input name="goal" type="number" min="1" value="${S.sav.goal}"></label><label>Add savings (₹)<input name="add" type="number" min="1" placeholder="e.g. 100"></label></div><button class="btn">Save</button></form></div></div>
+ <div class="note">Not connected to any bank or lender. Confirm balances and due dates against official statements.</div>`}
+
+function profile(){const p=S.prof;return `<div class="eyebrow">YOUR KISANSETU PROFILE</div><h1>Your farm. Your story.</h1><div class="grid"><div class="card"><div class="eyebrow">FARMER</div><h2>${esc(p.name)}</h2><p>📍 ${esc(p.village)}, ${esc(p.district)}, Maharashtra</p><button class="btn" data-a="m" data-v="prof">Edit profile</button></div><div class="card"><div class="eyebrow">FARM DETAILS</div><div class="li"><span>Farm area</span><b>${esc(p.acres||'—')} acres</b></div><div class="li"><span>Crops</span><b>${esc(p.crops||'—')}</b></div></div><div class="card"><div class="eyebrow">PRIVACY</div><p>Data is saved in this browser on this device. Avoid shared devices for private financial records.</p><button class="btn o sm" data-a="reset">Clear all my data</button></div></div>`}
+
+function modalHtml(){
+ const f=(t,s,b)=>`<div class="modal" data-a="bg"><div><button class="x" data-a="close">✕</button><h2>${t}</h2><p style="color:var(--mute);margin:0 0 14px">${s}</p>${b}</div></div>`;
+ if(modal==='exp')return f('Aaj ka kharcha','Amount aur category daalo — baaki hisaab app sambhalega.',`<form data-f="exp"><label>Kitna kharcha hua? (₹)<input name="amt" type="number" min="1" required autofocus placeholder="Jaise 1200"></label><label>Kis cheez par?<select name="cat">${cats.map(c=>`<option value="${c[0]}">${c[1]} ${c[0]}</option>`).join('')}</select></label><label>Detail (optional)<input name="t" placeholder="e.g. tractor diesel"></label><div class="two"><label>Crop<select name="crop">${['Cotton','Onion','Soybean','Tomato','Other'].map(c=>`<option value="${c}">${c}</option>`).join('')}</select></label><label>Date<input name="d" type="date" value="${today()}" required></label></div><button class="btn" style="width:100%">Save expense</button></form>`);
+ if(modal==='lst')return f('List your produce','Saves a local draft only. It is not published online.',`<form data-f="lst"><label>Crop<input name="crop" required placeholder="e.g. Red onion"></label><div class="two"><label>Quantity (quintal)<input name="q" type="number" min="1" required></label><label>Price/quintal (₹)<input name="p" type="number" min="1" required></label></div><label>Location<input name="loc" placeholder="Village, district"></label><button class="btn" style="width:100%">Save listing draft</button></form>`);
+ if(modal==='loan')return f('Add a loan record','Optional fields can be left blank.',`<form data-f="loan"><label>Loan name<input name="name" required placeholder="e.g. Crop loan"></label><label>Lender<input name="lender"></label><div class="two"><label>Outstanding (₹)<input name="bal" type="number" min="0" required></label><label>Instalment (₹)<input name="emi" type="number" min="0"></label></div><label>Next due date<input name="due" type="date"></label><button class="btn" style="width:100%">Save loan record</button></form>`);
+ if(modal==='prof'){const p=S.prof;return f('Edit farmer profile','Saved locally in this browser.',`<form data-f="prof"><label>Full name<input name="name" value="${esc(p.name)}"></label><div class="two"><label>Village<input name="village" value="${esc(p.village)}"></label><label>District<input name="district" value="${esc(p.district)}"></label></div><div class="two"><label>Acres<input name="acres" type="number" step="0.1" min="0" value="${esc(p.acres)}"></label><label>Crops<input name="crops" value="${esc(p.crops)}"></label></div><button class="btn" style="width:100%">Save profile</button></form>`)}
+ if(modal&&modal[0]==='h'){const h=help[+modal.slice(1)];
+  if(h[1]==='Crop Doctor')return f(h[1],'Preliminary notes only — no diagnosis is made here.',`<label>Crop<select><option>Cotton</option><option>Onion</option><option>Soybean</option><option>Tomato</option></select></label><label>Photo<input type="file" accept="image/*"></label><label>Symptoms<textarea rows="3" placeholder="e.g. yellow spots on older leaves"></textarea></label><button class="btn" style="width:100%" data-a="notes">Prepare crop notes</button><div class="note">For treatment decisions, consult a qualified agricultural expert or your local KVK.</div>`);
+  if(h[1]==='Snake Rescue')return f(h[1],'Keep yourself and others safe.',`<ul><li>Stay well away; do not touch, catch or kill the snake.</li><li>Keep children and pets away and leave the snake an escape route.</li><li>Contact a verified local rescuer or emergency authority.</li><li>If someone is bitten, get emergency medical care immediately. Do not cut, suck, ice or tie a tight tourniquet.</li></ul><div class="note">No verified rescuer number is configured yet. Add one before relying on this.</div>`);
+  return f(h[1],h[2],`<p>This service is a demo. Connect verified local resources before relying on it.</p><button class="btn" data-a="close">Got it</button>`)}
+ return ''}
+
+const D={};`Namaste, Farmer 👋|नमस्कार, शेतकरी 👋|नमस्ते, किसान 👋
+Farmer|शेतकरी|किसान
+Home|मुख्यपृष्ठ|होम
+Market|बाजार|बाज़ार
+Help Care|मदत केंद्र|सहायता केंद्र
+Loan|कर्ज|ऋण
+Profile|प्रोफाइल|प्रोफ़ाइल
+KISAN SE SEVA TAK|किसान से सेवा तक|किसान से सेवा तक
+Kisan Se Seva Tak|किसान से सेवा तक|किसान से सेवा तक
+Built for farmers, with care. Offline-ready demo|शेतकऱ्यांसाठी प्रेमाने बनवले. ऑफलाइन डेमो|किसानों के लिए, देखभाल से बनाया। ऑफ़लाइन डेमो
+YOUR FARM, YOUR FUTURE|तुमची शेती, तुमचे भविष्य|आपकी खेती, आपका भविष्य
+Growing a better|उज्ज्वल उद्यासाठी|एक बेहतर कल के लिए
+tomorrow, together.|एकत्र वाटचाल.|साथ मिलकर आगे बढ़ें।
+Smart farming. Better decisions. Stronger farmers.|स्मार्ट शेती. चांगले निर्णय. सक्षम शेतकरी.|स्मार्ट खेती। बेहतर फैसले। मज़बूत किसान।
+Explore market →|बाजार पाहा →|बाज़ार देखें →
+Get farm help|शेती मदत मिळवा|खेती में मदद पाएं
+Small steps today. A stronger harvest tomorrow.|आजची छोटी पावले, उद्याचे भरघोस पीक.|आज के छोटे कदम, कल की बेहतर फसल।
+Recorded expenses|नोंदवलेला खर्च|दर्ज खर्च
+Loan balance|कर्ज शिल्लक|ऋण शेष
+Plan your next instalment|पुढील हप्त्याचे नियोजन करा|अगली किस्त की योजना बनाएं
+No loan recorded|कर्ज नोंदवलेले नाही|कोई ऋण दर्ज नहीं
+Savings goal|बचत उद्दिष्ट|बचत लक्ष्य
+QUICK ACTIONS|झटपट कृती|त्वरित कार्य
+Add expense|खर्च जोडा|खर्च जोड़ें
+Record today’s kharcha|आजचा खर्च नोंदवा|आज का खर्च दर्ज करें
+Crop Doctor|पीक डॉक्टर|फसल डॉक्टर
+Check crop concerns|पिकाच्या समस्या तपासा|फसल की समस्याएं जांचें
+Sell produce|माल विका|उपज बेचें
+Reach more buyers|अधिक खरेदीदारांपर्यंत पोहोचा|अधिक खरीदारों तक पहुंचें
+Loan & savings|कर्ज आणि बचत|ऋण और बचत
+Plan your next payment|पुढील भरण्याचे नियोजन|अगले भुगतान की योजना
+RECENT EXPENSES|अलीकडील खर्च|हाल के खर्च
++ Add new|+ नवीन जोडा|+ नया जोड़ें
+No expenses yet.|अजून खर्च नाही.|अभी कोई खर्च नहीं।
+AAJ KI BACHAT|आजची बचत|आज की बचत
+View savings plan|बचत योजना पाहा|बचत योजना देखें
+Demo note: sample listings and figures are illustrative. Your records are stored only in this browser.|डेमो सूचना: नमुना यादी व आकडे उदाहरणादाखल आहेत. तुमच्या नोंदी फक्त या ब्राउझरमध्ये साठवल्या जातात.|डेमो नोट: नमूना सूची और आंकड़े उदाहरण मात्र हैं। आपके रिकॉर्ड केवल इसी ब्राउज़र में सहेजे जाते हैं।
+Seeds|बियाणे|बीज
+Fertiliser|खत|उर्वरक
+Pesticides|कीटकनाशके|कीटनाशक
+Labour|मजुरी|मज़दूरी
+Irrigation|सिंचन|सिंचाई
+Fuel|इंधन|ईंधन
+Transport|वाहतूक|परिवहन
+Other|इतर|अन्य
+Cotton|कापूस|कपास
+Onion|कांदा|प्याज
+Soybean|सोयाबीन|सोयाबीन
+Tomato|टोमॅटो|टमाटर
+Cotton seeds|कापूस बियाणे|कपास बीज
+Drip irrigation repair|ठिबक सिंचन दुरुस्ती|ड्रिप सिंचाई मरम्मत
+Farm labour|शेतमजुरी|खेत मज़दूरी
+Fresh Onions|ताजे कांदे|ताज़ा प्याज
+Fresh Tomatoes|ताजे टोमॅटो|ताज़े टमाटर
+Grade A|ग्रेड A|ग्रेड A
+Grade B|ग्रेड B|ग्रेड B
+Cleaned|स्वच्छ केलेले|साफ़ किया हुआ
+Seasonal farm loan|हंगामी शेती कर्ज|मौसमी कृषि ऋण
+My bank|माझी बँक|मेरा बैंक
+AGROTRADE MARKETPLACE|अ‍ॅग्रोट्रेड बाजारपेठ|एग्रोट्रेड बाज़ार
+Your harvest deserves a fair market.|तुमच्या पिकाला योग्य बाजार मिळायला हवा.|आपकी फसल को उचित बाज़ार मिलना चाहिए।
++ Sell my crop|+ माझे पीक विका|+ मेरी फसल बेचें
+Buy produce|माल खरेदी|उपज खरीदें
+Search crops or location…|पिके किंवा ठिकाण शोधा…|फसल या स्थान खोजें…
+per quintal|प्रति क्विंटल|प्रति क्विंटल
+Enquire / Request order|चौकशी / ऑर्डर मागणी|पूछताछ / ऑर्डर अनुरोध
+No matching crops.|जुळणारी पिके नाहीत.|कोई मेल खाती फसल नहीं।
+Saved locally|स्थानिक जतन|स्थानीय रूप से सहेजा
+No enquiries yet. Browse produce and tap Enquire.|अजून चौकशी नाही. माल पाहा आणि चौकशी दाबा.|अभी कोई पूछताछ नहीं। उपज देखें और पूछताछ दबाएं।
+Local demo only: no seller is contacted and no binding order is placed.|फक्त स्थानिक डेमो: कोणत्याही विक्रेत्याशी संपर्क होत नाही व बंधनकारक ऑर्डर दिली जात नाही.|केवल स्थानीय डेमो: किसी विक्रेता से संपर्क नहीं होता और कोई बाध्यकारी ऑर्डर नहीं दिया जाता।
+Sample listings and prices are not verified mandi rates or confirmed offers.|नमुना यादी व किमती पडताळलेले मंडी भाव किंवा निश्चित ऑफर नाहीत.|नमूना सूची और कीमतें सत्यापित मंडी भाव या पक्के प्रस्ताव नहीं हैं।
+SHETI SUPPORT CENTRE|शेती सहाय्य केंद्र|खेती सहायता केंद्र
+A little help can go a long way.|थोडी मदतही खूप उपयोगी ठरते.|थोड़ी मदद भी बहुत काम आती है।
+AgroCare experts|अ‍ॅग्रोकेअर तज्ज्ञ|एग्रोकेयर विशेषज्ञ
+Snake Rescue|सर्प बचाव|सांप बचाव
+Soil testing|माती परीक्षण|मिट्टी परीक्षण
+Smart irrigation|स्मार्ट सिंचन|स्मार्ट सिंचाई
+Weather & monsoon|हवामान आणि मान्सून|मौसम और मानसून
+Machinery & services|यंत्रे आणि सेवा|मशीनरी और सेवाएं
+Harvest & storage|काढणी आणि साठवण|कटाई और भंडारण
+Add a crop photo and symptoms to prepare notes for an expert.|तज्ज्ञांसाठी नोंदी तयार करण्यास पिकाचा फोटो व लक्षणे जोडा.|विशेषज्ञ के लिए नोट्स बनाने हेतु फसल की फोटो और लक्षण जोड़ें।
+Find KVKs, agriculture officers and soil labs near you.|जवळचे KVK, कृषी अधिकारी व माती प्रयोगशाळा शोधा.|अपने पास के KVK, कृषि अधिकारी और मिट्टी लैब खोजें।
+Safety steps if a snake is spotted on the farm.|शेतात साप दिसल्यास सुरक्षेचे उपाय.|खेत में सांप दिखे तो सुरक्षा के उपाय।
+Record soil reports and nutrient information.|माती अहवाल व पोषक घटकांची नोंद ठेवा.|मिट्टी रिपोर्ट और पोषक तत्वों की जानकारी दर्ज करें।
+Plan watering around crop stage and soil.|पिकाची अवस्था व मातीनुसार पाण्याचे नियोजन करा.|फसल की अवस्था और मिट्टी के अनुसार सिंचाई की योजना बनाएं।
+Note local forecasts with the time you checked them.|स्थानिक अंदाज तपासल्याच्या वेळेसह नोंदवा.|स्थानीय पूर्वानुमान जांच के समय के साथ नोट करें।
+Keep tractor, transport and repair contacts together.|ट्रॅक्टर, वाहतूक व दुरुस्तीचे संपर्क एकत्र ठेवा.|ट्रैक्टर, परिवहन और मरम्मत के संपर्क एक जगह रखें।
+Plan harvest timing and reduce avoidable waste.|काढणीची वेळ ठरवा व टाळता येणारा अपव्यय कमी करा.|कटाई का समय तय करें और टाली जा सकने वाली बर्बादी घटाएं।
+Open|उघडा|खोलें
+Need a real expert? Use verified KVK or government agriculture contacts. Live services are not connected in this demo.|खऱ्या तज्ज्ञाची गरज? पडताळलेले KVK किंवा सरकारी कृषी संपर्क वापरा. थेट सेवा या डेमोमध्ये जोडलेल्या नाहीत.|असली विशेषज्ञ चाहिए? सत्यापित KVK या सरकारी कृषि संपर्क उपयोग करें। लाइव सेवाएं इस डेमो में जुड़ी नहीं हैं।
+Preliminary notes only — no diagnosis is made here.|फक्त प्राथमिक नोंदी — येथे निदान केले जात नाही.|केवल प्रारंभिक नोट्स — यहां निदान नहीं किया जाता।
+Crop|पीक|फसल
+Photo|फोटो|फोटो
+Symptoms|लक्षणे|लक्षण
+e.g. yellow spots on older leaves|उदा. जुन्या पानांवर पिवळे डाग|जैसे पुरानी पत्तियों पर पीले धब्बे
+Prepare crop notes|पीक नोंदी तयार करा|फसल नोट्स तैयार करें
+For treatment decisions, consult a qualified agricultural expert or your local KVK.|उपचारांसाठी पात्र कृषी तज्ज्ञ किंवा स्थानिक KVK चा सल्ला घ्या.|उपचार के फैसलों के लिए योग्य कृषि विशेषज्ञ या स्थानीय KVK से सलाह लें।
+Keep yourself and others safe.|स्वतःला व इतरांना सुरक्षित ठेवा.|खुद को और दूसरों को सुरक्षित रखें।
+Stay well away; do not touch, catch or kill the snake.|दूर राहा; सापाला हात लावू नका, पकडू नका, मारू नका.|दूर रहें; सांप को न छुएं, न पकड़ें, न मारें।
+Keep children and pets away and leave the snake an escape route.|मुले व पाळीव प्राणी दूर ठेवा व सापाला जाण्यास वाट ठेवा.|बच्चों और पालतू जानवरों को दूर रखें और सांप को जाने का रास्ता दें।
+Contact a verified local rescuer or emergency authority.|पडताळलेल्या स्थानिक सर्पमित्राशी किंवा आपत्कालीन यंत्रणेशी संपर्क साधा.|सत्यापित स्थानीय बचावकर्ता या आपात सेवा से संपर्क करें।
+If someone is bitten, get emergency medical care immediately. Do not cut, suck, ice or tie a tight tourniquet.|कोणाला चावल्यास तत्काळ वैद्यकीय मदत घ्या. जखम कापू नका, चोखू नका, बर्फ लावू नका, घट्ट बांधू नका.|किसी को काटे तो तुरंत चिकित्सा सहायता लें। घाव न काटें, न चूसें, न बर्फ लगाएं, न कसकर बांधें।
+No verified rescuer number is configured yet. Add one before relying on this.|पडताळलेला सर्पमित्र क्रमांक अजून नाही. यावर अवलंबून राहण्यापूर्वी एक जोडा.|कोई सत्यापित बचावकर्ता नंबर अभी नहीं है। भरोसा करने से पहले एक जोड़ें।
+This service is a demo. Connect verified local resources before relying on it.|ही सेवा डेमो आहे. अवलंबून राहण्यापूर्वी पडताळलेली स्थानिक संसाधने जोडा.|यह सेवा डेमो है। भरोसा करने से पहले सत्यापित स्थानीय संसाधन जोड़ें।
+Got it|समजले|समझ गया
+KARJAMUKTI MITRA|कर्जमुक्ती मित्र|कर्जमुक्ति मित्र
+Your money, with a clearer plan.|तुमचा पैसा, स्पष्ट नियोजनासह.|आपका पैसा, स्पष्ट योजना के साथ।
++ Add loan|+ कर्ज जोडा|+ ऋण जोड़ें
+LOANS & INSTALMENTS|कर्ज आणि हप्ते|ऋण और किस्तें
+Lender not specified|कर्जदाता नमूद नाही|ऋणदाता निर्दिष्ट नहीं
+Due date not entered|देय तारीख नाही|देय तिथि दर्ज नहीं
+Remove|काढा|हटाएं
+No loans recorded.|कर्ज नोंदवलेले नाही.|कोई ऋण दर्ज नहीं।
+BUILD YOUR SAVINGS HABIT|बचतीची सवय लावा|बचत की आदत बनाएं
+Goal (₹)|उद्दिष्ट (₹)|लक्ष्य (₹)
+Add savings (₹)|बचत जोडा (₹)|बचत जोड़ें (₹)
+Save|जतन करा|सहेजें
+e.g. 100|उदा. 100|जैसे 100
+Not connected to any bank or lender. Confirm balances and due dates against official statements.|कोणत्याही बँक/कर्जदात्याशी जोडलेले नाही. शिल्लक व देय तारखा अधिकृत विवरणाशी पडताळा.|किसी बैंक/ऋणदाता से जुड़ा नहीं है। शेष और देय तिथियां आधिकारिक विवरण से मिलाएं।
+YOUR KISANSETU PROFILE|तुमची किसानसेतू प्रोफाइल|आपकी किसानसेतु प्रोफ़ाइल
+Your farm. Your story.|तुमची शेती. तुमची कहाणी.|आपका खेत। आपकी कहानी।
+FARMER|शेतकरी|किसान
+Edit profile|प्रोफाइल संपादित करा|प्रोफ़ाइल संपादित करें
+FARM DETAILS|शेतीचा तपशील|खेत का विवरण
+Farm area|शेताचे क्षेत्र|खेत का क्षेत्र
+Crops|पिके|फसलें
+PRIVACY|गोपनीयता|गोपनीयता
+Data is saved in this browser on this device. Avoid shared devices for private financial records.|डेटा या उपकरणावरील या ब्राउझरमध्ये साठवला जातो. खासगी आर्थिक नोंदींसाठी सामायिक उपकरण टाळा.|डेटा इसी डिवाइस के इस ब्राउज़र में सहेजा जाता है। निजी वित्तीय रिकॉर्ड के लिए साझा डिवाइस से बचें।
+Clear all my data|माझा सर्व डेटा पुसा|मेरा सारा डेटा मिटाएं
+Clear all saved data on this device?|या उपकरणावरील सर्व जतन केलेला डेटा पुसायचा?|इस डिवाइस का सारा सहेजा डेटा मिटाएं?
+Aaj ka kharcha|आजचा खर्च|आज का खर्च
+Amount aur category daalo — baaki hisaab app sambhalega.|रक्कम व प्रकार भरा — बाकी हिशोब अ‍ॅप सांभाळेल.|राशि और श्रेणी डालें — बाकी हिसाब ऐप संभालेगा।
+Kitna kharcha hua? (₹)|किती खर्च झाला? (₹)|कितना खर्च हुआ? (₹)
+Kis cheez par?|कशावर खर्च?|किस चीज़ पर?
+Detail (optional)|तपशील (ऐच्छिक)|विवरण (वैकल्पिक)
+Date|तारीख|तारीख
+Save expense|खर्च जतन करा|खर्च सहेजें
+List your produce|तुमचा माल नोंदवा|अपनी उपज सूचीबद्ध करें
+Saves a local draft only. It is not published online.|फक्त स्थानिक मसुदा जतन होतो. ऑनलाइन प्रकाशित होत नाही.|केवल स्थानीय ड्राफ्ट सहेजा जाता है। ऑनलाइन प्रकाशित नहीं होता।
+Quantity (quintal)|प्रमाण (क्विंटल)|मात्रा (क्विंटल)
+Price/quintal (₹)|किंमत/क्विंटल (₹)|कीमत/क्विंटल (₹)
+Location|ठिकाण|स्थान
+Save listing draft|यादी मसुदा जतन करा|सूची ड्राफ्ट सहेजें
+Add a loan record|कर्ज नोंद जोडा|ऋण रिकॉर्ड जोड़ें
+Optional fields can be left blank.|ऐच्छिक रकाने रिकामे ठेवता येतात.|वैकल्पिक फ़ील्ड खाली छोड़ सकते हैं।
+Loan name|कर्जाचे नाव|ऋण का नाम
+Lender|कर्जदाता|ऋणदाता
+Outstanding (₹)|थकबाकी (₹)|बकाया (₹)
+Instalment (₹)|हप्ता (₹)|किस्त (₹)
+Next due date|पुढील देय तारीख|अगली देय तिथि
+Save loan record|कर्ज नोंद जतन करा|ऋण रिकॉर्ड सहेजें
+Edit farmer profile|शेतकरी प्रोफाइल संपादित करा|किसान प्रोफ़ाइल संपादित करें
+Saved locally in this browser.|या ब्राउझरमध्ये स्थानिक जतन.|इस ब्राउज़र में स्थानीय रूप से सहेजा।
+Full name|पूर्ण नाव|पूरा नाम
+Village|गाव|गांव
+District|जिल्हा|ज़िला
+Acres|एकर|एकड़
+Save profile|प्रोफाइल जतन करा|प्रोफ़ाइल सहेजें
+Expense saved on this device.|खर्च या उपकरणावर जतन केला.|खर्च इस डिवाइस पर सहेजा गया।
+Draft saved locally. It has not been published online.|मसुदा स्थानिक जतन केला. तो ऑनलाइन प्रकाशित केलेला नाही.|ड्राफ्ट स्थानीय रूप से सहेजा गया। यह ऑनलाइन प्रकाशित नहीं हुआ है।
+Loan record saved on this device.|कर्ज नोंद या उपकरणावर जतन केली.|ऋण रिकॉर्ड इस डिवाइस पर सहेजा गया।
+Loan record removed.|कर्ज नोंद काढली.|ऋण रिकॉर्ड हटाया गया।
+Profile saved on this device.|प्रोफाइल या उपकरणावर जतन केली.|प्रोफ़ाइल इस डिवाइस पर सहेजी गई।
+Savings updated. This records money set aside, not a loan repayment.|बचत अद्ययावत केली. ही बाजूला ठेवलेली रक्कम आहे, कर्जफेड नाही.|बचत अपडेट हुई। यह अलग रखी राशि है, ऋण भुगतान नहीं।
+Enquiry saved to My Orders on this device. No seller was contacted.|चौकशी माझ्या ऑर्डर्समध्ये जतन झाली. कोणत्याही विक्रेत्याशी संपर्क झाला नाही.|पूछताछ मेरे ऑर्डर में सहेजी गई। किसी विक्रेता से संपर्क नहीं हुआ।
+Crop notes ready to share with an expert. No diagnosis was performed.|पीक नोंदी तज्ज्ञांना देण्यास तयार. कोणतेही निदान केलेले नाही.|फसल नोट्स विशेषज्ञ को देने के लिए तैयार। कोई निदान नहीं किया गया।`.split('\n').forEach(l=>{const p=l.split('|');D[p[0]]=[p[1],p[2]]});
+const R=[[/^(\d+) entries saved$/,'$1 नोंदी जतन','$1 प्रविष्टियाँ सहेजी'],[/^My Orders \((\d+)\)$/,'माझ्या ऑर्डर्स ($1)','मेरे ऑर्डर ($1)'],[/^(\d+) quintal$/,'$1 क्विंटल','$1 क्विंटल'],[/^(.+) acres$/,'$1 एकर','$1 एकड़'],[/^(₹[\d,]+) to go$/,'$1 बाकी','$1 बाकी'],[/^of (₹[\d,]+)$/,'$1 पैकी','$1 में से'],[/^(\d+)% of (₹[\d,]+) goal$/,'$2 उद्दिष्टाच्या $1%','$2 लक्ष्य का $1%'],[/^Next due: (.+)$/,'पुढील देय: $1','अगली देय: $1'],[/^Namaste, (.+) 👋$/,'नमस्कार, $1 👋','नमस्ते, $1 👋']];
+function tx(s){if(L==='en')return s;const i=L==='mr'?0:1,m=s.match(/^(\s*)([\s\S]*?)(\s*)$/),c=m[2];if(!c)return s;const one=x=>{if(D[x])return D[x][i];for(const r of R)if(r[0].test(x))return x.replace(r[0],r[1+i]);const e=x.match(/^(\p{Extended_Pictographic}\S*) (.+)$/u);return e&&D[e[2]]?e[1]+' '+D[e[2]][i]:null};let o=one(c);if(o==null&&c.includes(' · '))o=c.split(' · ').map(p=>one(p)??p).join(' · ');return m[1]+(o??c)+m[3]}
+function tr(){document.documentElement.lang=L;const w=document.createTreeWalker($('#app'),NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);ns.forEach(n=>{const v=tx(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v});document.querySelectorAll('#app [placeholder]').forEach(e=>{e.placeholder=tx(e.placeholder)})}
+function draw(){
+ const y=window.scrollY,body=page==='Home'?home():page==='Market'?market():page==='Help Care'?helpPg():page==='Loan'?loan():profile();
+ $('#app').innerHTML=`<header><button class="brand" data-a="go" data-v="Home">🌱 KisanSetu AI<small>KISAN SE SEVA TAK</small></button><nav>${pages.map(p=>`<button class="${page===p?'on':''}" data-a="go" data-v="${p}">${p}</button>`).join('')}</nav><select id="lang" aria-label="Language">${[['en','English'],['mr','मराठी'],['hi','हिंदी']].map(o=>`<option value="${o[0]}"${L===o[0]?' selected':''}>🌐 ${o[1]}</option>`).join('')}</select></header><main>${body}</main><footer>Kisan Se Seva Tak · Built for farmers, with care. Offline-ready demo</footer>${modalHtml()}${toast?`<div class="toast">${esc(toast)}</div>`:''}`;
+ tr();window.scrollTo(0,y)}
+
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=b.dataset.v;
+ if(a==='bg'&&e.target!==b)return;
+ if(a==='go'){page=v;modal=null;draw();window.scrollTo(0,0)}
+ else if(a==='m'){modal=v;draw()}
+ else if(a==='close'||a==='bg'){modal=null;draw()}
+ else if(a==='tab'){tab=v;draw()}
+ else if(a==='enq'){const i=S.lst.find(x=>x.id==v);S.ord.unshift({id:Date.now(),crop:i.crop,q:i.q,p:i.p,s:i.note,d:new Date().toLocaleDateString('en-IN')});save();tab='My Orders';say('Enquiry saved to My Orders on this device. No seller was contacted.')}
+ else if(a==='rm'){S.loans=S.loans.filter(l=>l.id!=v);save();say('Loan record removed.')}
+ else if(a==='notes'){modal=null;say('Crop notes ready to share with an expert. No diagnosis was performed.')}
+ else if(a==='reset'&&confirm(tx('Clear all saved data on this device?'))){try{localStorage.clear()}catch(x){};location.reload()}
+});
+document.addEventListener('input',e=>{if(e.target.id==='q'){q=e.target.value;$('#lg').innerHTML=lg(S.lst.filter(i=>(i.crop+i.loc+i.note).toLowerCase().includes(q.toLowerCase())));tr()}});
+document.addEventListener('change',e=>{if(e.target.id==='lang'){L=e.target.value;try{localStorage.setItem('ks-lang',JSON.stringify(L))}catch(x){}draw()}});
+document.addEventListener('submit',e=>{
+ e.preventDefault();const f=e.target.dataset.f,d=Object.fromEntries(new FormData(e.target));
+ if(f==='exp'){S.exp.unshift({id:Date.now(),t:d.t||d.cat.replace(/^\S+\s/,''),cat:d.cat.replace(/^\S+\s/,''),crop:d.crop,amt:+d.amt,d:d.d});modal=null;save();say('Expense saved on this device.')}
+ if(f==='lst'){S.lst.unshift({id:Date.now(),crop:d.crop,em:'🌾',loc:d.loc||S.prof.district+', Maharashtra',q:+d.q,p:+d.p,note:'Your draft · needs verification'});modal=null;save();say('Draft saved locally. It has not been published online.')}
+ if(f==='loan'){S.loans.push({id:Date.now(),name:d.name,lender:d.lender,bal:+d.bal,emi:+d.emi||0,due:d.due});modal=null;save();say('Loan record saved on this device.')}
+ if(f==='prof'){S.prof=d;modal=null;save();say('Profile saved on this device.')}
+ if(f==='sav'){S.sav.goal=Math.max(1,+d.goal||S.sav.goal);S.sav.saved+=Math.max(0,+d.add||0);save();say('Savings updated. This records money set aside, not a loan repayment.')}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal){modal=null;draw()}});
+draw();
+</script></body></html>
